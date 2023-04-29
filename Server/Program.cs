@@ -60,7 +60,6 @@ namespace RentABikeV3
             app.MapControllers();
             app.MapFallbackToFile("index.html");
 
-                        app.MapBikeEndpoints();
 
             app.Run();
         }

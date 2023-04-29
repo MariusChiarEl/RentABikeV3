@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 namespace RentABikeV3.Shared
 {
@@ -15,7 +14,7 @@ namespace RentABikeV3.Shared
 
         public bool Type { get; set; } // 0 -> CityBike ; 1 -> MountainBike
         
-        //public List<DateTime> Rezervari { get; set; }
+        public List<DateTime> Rezervari { get; set; }
         //{"31 mai, 16:15", "31 mai, 18:15", "31 mai, 19:15", "31 mai, 20:15", 
     }
 }

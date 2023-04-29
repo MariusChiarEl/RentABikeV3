@@ -1,0 +1,18 @@
+﻿@page "/rent-bikes"
+
+<PageTitle>Rent a bike</PageTitle>
+
+<h1>De aici clientul isi va selecta si rezerva bicicleta</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}

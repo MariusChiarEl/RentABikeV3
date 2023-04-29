@@ -1,0 +1,30 @@
+﻿@using RentABikeV3.Shared
+@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<button class="btn btn-primary" @onclick="createBikeLAMISTO">Click me</button>
+@if (BikeCreated)
+{
+    @if (bicla != null)
+    {
+        <br />
+        @bicla.Model
+    }
+}
+
+@code {
+    public bool BikeCreated = false;
+    public RentedBike? bicla;
+
+    private void createBikeLAMISTO()
+    {
+        DateTime start = new DateTime(2023, 5, 31, 16, 30, 0, 0);
+        DateTime end = new DateTime(2023, 5, 31, 18, 30, 0, 0);
+        bicla = new RentedBike("Pegas 100", start, end, 5);
+        if (bicla != null)
+            BikeCreated = true;
+    }
+}

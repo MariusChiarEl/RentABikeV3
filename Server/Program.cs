@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RentABikeV3.Server.Data;
 using RentABikeV3.Server.Controllers;
+using RentABikeV3.Server.Interfaces;
+using RentABikeV3.Server.Repository;
 
 namespace RentABikeV3
 {
@@ -15,6 +17,9 @@ namespace RentABikeV3
 
                         builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<IBikeRepository, BikeRepository>();
+            builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
             // Add services to the container.
 
             builder.Services.AddControllersWithViews();

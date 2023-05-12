@@ -12,9 +12,10 @@ namespace RentABikeV3.Shared
         public string Model { get; set; }
         public double Discount { get; set; }
 
-        public bool Type { get; set; } // 0 -> CityBike ; 1 -> MountainBike
-        
-        public List<DateTime> Rezervari { get; set; }
-        //{"31 mai, 16:15", "31 mai, 18:15", "31 mai, 19:15", "31 mai, 20:15", 
+        public bool Type { get; set; } // 0 -> CityBike ; 1 -> 
+
+        public double Price { get; set; }
+
+        public ICollection<Reservation> Reservations { get; } = new List<Reservation>();
     }
 }

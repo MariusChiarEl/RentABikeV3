@@ -1,51 +1,67 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Runtime.InteropServices;
 using RentABikeV3.Shared;
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using RentABikeV3.Server.Interfaces;
 
 namespace RentABikeV3.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BikesController : ControllerBase
+    public class BikeController : ControllerBase
     {
-        private readonly List<Bike> bikes;
+        private readonly IBikeRepository bikeRepository;
 
-        public BikesController()
+        public BikeController(IBikeRepository bikeRepository)
         {
-            bikes = new List<Bike>();
+            this.bikeRepository = bikeRepository;
         }
-
-        // GET: api/<BikesController>
         [HttpGet]
-        public ActionResult<List<Bike>> Get()
+        public async Task<ActionResult<List<Bike>>> GetAllBikes()
         {
-            return Ok(bikes);
-        }
+            var result = bikeRepository.GetAllBikes();
+            if (result is null) return NotFound();
+            return Ok(result);
 
-        // GET api/<BikesController>/5
+        }
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Bike>> GetSingleBike(int id)
         {
-            return "value";
-        }
+            var result = bikeRepository.GetSingleBike(id);
+            if (result is null) return NotFound();
+            return Ok(result);
 
-        // POST api/<BikesController>
+        }
         [HttpPost]
-        public ActionResult Post([FromBody] Bike bike)
+        public async Task<ActionResult<List<Bike>>> AddBike(Bike bike)
         {
-            return CreatedAtAction("GetBike", bike);
-        }
+            if(bike == null)
+                return BadRequest("No bike!");
 
-        // PUT api/<BikesController>/5
+            bikeRepository.AddBike(bike);
+
+            return Ok();
+
+        }
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<List<Bike>>> UpdateBike(int id, Bike bike)
         {
+            if (bike == null)
+                return BadRequest("No bike!");
+            bikeRepository.UpdateBike(id, bike);
+
+            return Ok();
+        }
+        [HttpDelete]
+        public async Task<ActionResult<List<Bike>>> DeleteBike(int id)
+        {
+            if (id == null)
+                return BadRequest("No bike!");
+
+            bikeRepository.DeleteBike(id);
+
+            return Ok();
         }
 
-        // DELETE api/<BikesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

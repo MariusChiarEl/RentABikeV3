@@ -14,6 +14,16 @@ namespace RentABikeV3.Server.Data
         {
         }
 
-        public DbSet<RentABikeV3.Shared.Bike> Bike { get; set; } = default!;
+        public DbSet<RentABikeV3.Shared.Bike> Bikes { get; set; } = default!;
+        public DbSet<RentABikeV3.Shared.Reservation> Reservations { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Bike>()
+            //    .HasMany(e => e.Reservations)
+            //    .WithOne(e => e.Bike)
+            //    .HasForeignKey(e => e.BikeId);
+            //    //.IsRequired();
+        }
     }
 }

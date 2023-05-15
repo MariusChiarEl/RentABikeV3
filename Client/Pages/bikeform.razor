@@ -35,16 +35,24 @@
 
     private async Task SubmitForm()
     {
-        var formData = new FormUrlEncodedContent(new[]
-        {
-            new KeyValuePair<string, string>("model", model),
-            new KeyValuePair<string, string>("discount", discount.ToString()),
-            new KeyValuePair<string, string>("type", type.ToString()),
-            new KeyValuePair<string, string>("price", price.ToString())
-        });
+       try
+{
+    var formData = new FormUrlEncodedContent(new[]
+    {
+        new KeyValuePair<string, string>("model", model),
+        new KeyValuePair<string, string>("discount", discount.ToString()),
+        new KeyValuePair<string, string>("type", type ? "true" : "false"),
+        new KeyValuePair<string, string>("price", price.ToString())
+    });
 
-        var httpClient = new HttpClient();
-        var response = await httpClient.PostAsync("https://localhost:7246/api/Bike", formData);
+    var httpClient = new HttpClient();
+    var response = await httpClient.PostAsync("https://localhost:7246/api/Bike", formData);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Eroare la trimiterea cererii HTTP: {ex.Message}");
+    }
+
     }
 }
 

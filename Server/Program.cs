@@ -60,6 +60,8 @@ namespace RentABikeV3
 
             app.UseRouting();
 
+            app.UseCors("AllowAnyOrigin");
+            app.UseCors();
 
             app.MapRazorPages();
             app.MapControllers();

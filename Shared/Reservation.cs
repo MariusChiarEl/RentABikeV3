@@ -22,11 +22,8 @@ namespace RentABikeV3.Shared
                 return "Name not inserted!";
             }
 			int rentDay = rentEnd.Subtract(rentStart).Days;
-			if (rentDay > 2) return "Rent period too long. Must be at most 48H";
-
-			/*for (int i = 0; i < Rezervari.Count; i += 2)
-                if ((rentEnd >= Rezervari[i] && rentEnd <= Rezervari[i + 1]) || (rentStart >= Rezervari[i] && rentStart <= Rezervari[i + 1]))
-                    return "Rent overlaps other rent!";*/
+            if (rentDay > 2) return "Rent period too long. Must be at most 48H";
+			else if(rentDay!=0) return "OK!";
 
 			int rentTime = rentEnd.Subtract(rentStart).Hours;
 

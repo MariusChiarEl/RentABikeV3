@@ -12,7 +12,7 @@ namespace RentABikeV3.Shared
         public string Model { get; set; }
         public double Discount { get; set; }
 
-        public bool Type { get; set; } // 0 -> CityBike ; 1 -> 
+        public string Type { get; set; } // 0 -> CityBike ; 1 -> 
 
         public double Price { get; set; }
 

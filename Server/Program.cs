@@ -14,8 +14,18 @@ namespace RentABikeV3
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAnyOrigin", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
 
-                        builder.Services.AddEndpointsApiExplorer();
+
+            builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddScoped<IBikeRepository, BikeRepository>();
@@ -28,11 +38,14 @@ namespace RentABikeV3
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
-
+            app.UseCors("AllowAnyOrigin");
+            app.UseCors();
             // Configure the HTTP request pipeline.
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseWebAssemblyDebugging();
+
             }
             else
             {
@@ -41,12 +54,12 @@ namespace RentABikeV3
                 app.UseHsts();
             }
 
-                        if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-};
-
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            };
+            app.UseCors("AllowAnyOrigin");
             app.UseHttpsRedirection();
 
             app.UseBlazorFrameworkFiles();
@@ -60,8 +73,6 @@ namespace RentABikeV3
 
             app.UseRouting();
 
-            app.UseCors("AllowAnyOrigin");
-            app.UseCors();
 
             app.MapRazorPages();
             app.MapControllers();

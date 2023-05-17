@@ -1,10 +1,10 @@
 .App {
   text-align: center;
   display: flex;
-  min-height:100vh;
+  min-height: 100vh;
   align-items: center;
   justify-content: center;
-  background: url('parents-with-their-children.jpg') no-repeat center center fixed;
+  background: url('register_background.jpg') no-repeat center center fixed;
   background-size: cover;
   height: 100%;
   overflow: hidden;
@@ -44,7 +44,7 @@ label > input {
 }
 
 button {
-  border: solid;
+  border: none;
   background-color: rgb(31, 108, 153);
   color: #efefef;
   padding: 20px;
@@ -173,7 +173,7 @@ main .header-text p:last-child {
 .expenses {
   background-image: linear-gradient(
       to right bottom,
-      rgba(13, 13, 14, 0.35),
+      rgba(73, 103, 237, 0.35),
       rgba(1, 16, 87, 0.35)
     ),
     url('blue.jpg');

@@ -40,8 +40,9 @@ namespace RentABikeV3.Server.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<bool>("Type")
-                        .HasColumnType("bit");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

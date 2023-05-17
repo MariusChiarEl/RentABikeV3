@@ -15,7 +15,7 @@
         </div>
         <div class="form-field">
             <label>Type</label>
-            <input type="checkbox" @bind-value="type" />
+            <input type="text" @bind-value="type" />
         </div>
 
         <div class="form-field">
@@ -28,9 +28,9 @@
 </div>
 
  @code {
-    private string model;
+    private string? model;
     private decimal discount;
-    private bool type;
+    private string? type;
     private decimal price;
 
     private async Task SubmitForm()
@@ -39,12 +39,12 @@
         {
             new KeyValuePair<string, string>("model", model),
             new KeyValuePair<string, string>("discount", discount.ToString()),
-            new KeyValuePair<string, string>("type", type.ToString()),
+            new KeyValuePair<string, string>("type", type),
             new KeyValuePair<string, string>("price", price.ToString())
         });
 
         var httpClient = new HttpClient();
-        var response = await httpClient.PostAsync("https://localhost:7246/api/Bike", formData);
+        var response = await httpClient.PostAsync("https://localhost:7246/api/Bike/AddBike", formData);
     }
 }
 

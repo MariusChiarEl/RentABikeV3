@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.EntityFrameworkCore;
+using RentABikeV3.Server.Data;
+using RentABikeV3.Server.Interfaces;
+using RentABikeV3.Server.Repository;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,8 +18,18 @@ namespace RentABikeV3
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAnyOrigin", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
 
-                        builder.Services.AddEndpointsApiExplorer();
+
+            builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddScoped<IBikeRepository, BikeRepository>();
@@ -28,11 +42,14 @@ namespace RentABikeV3
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
-
+            app.UseCors("AllowAnyOrigin");
+            app.UseCors();
             // Configure the HTTP request pipeline.
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseWebAssemblyDebugging();
+
             }
             else
             {
@@ -41,12 +58,12 @@ namespace RentABikeV3
                 app.UseHsts();
             }
 
-                        if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-};
-
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            };
+            app.UseCors("AllowAnyOrigin");
             app.UseHttpsRedirection();
 
             app.UseBlazorFrameworkFiles();

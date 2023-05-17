@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentABikeV3.Server.Data;
 
@@ -11,9 +12,11 @@ using RentABikeV3.Server.Data;
 namespace RentABikeV3.Server.Migrations
 {
     [DbContext(typeof(RentABikeV3ServerContext))]
-    partial class RentABikeV3ServerContextModelSnapshot : ModelSnapshot
+    [Migration("20230513095703_Bike_Type_Changed_To_String")]
+    partial class Bike_Type_Changed_To_String
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
